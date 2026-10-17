@@ -180,7 +180,7 @@ else
     echo "Configure it later with:"
     echo "  sudo $SCRIPT_DIR/configure-bluetooth.sh"
 fi
-                                  
+
 log "Starting services"
 
 systemctl start supervisord.service

@@ -7,9 +7,9 @@ ANT+ and the PiRowFlo Control API.
 
 The installer deploys:
 
-- PiRowFlo  
+- PiRowFlo
   https://github.com/stampede79/pirowflo
-- PiRowFlo Control API  
+- PiRowFlo Control API
   https://github.com/stampede79/pirowflo-control-api
 
 The Flutter Control App is maintained separately and is not installed on the
