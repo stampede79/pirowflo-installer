@@ -1,0 +1,16 @@
+[Unit]
+Description=Supervisor process control system for UNIX
+Documentation=http://supervisord.org
+After=network.target bluetooth.target
+
+[Service]
+ExecStart=#PIROWFLO_DIR#/venv/bin/supervisord -n -c #PIROWFLO_DIR#/services/supervisord.conf
+ExecStop=#PIROWFLO_DIR#/venv/bin/supervisorctl -c #PIROWFLO_DIR#/services/supervisord.conf shutdown
+ExecReload=#PIROWFLO_DIR#/venv/bin/supervisorctl -c #PIROWFLO_DIR#/services/supervisord.conf reload
+KillMode=process
+Restart=on-failure
+RestartSec=50s
+EnvironmentFile=-/etc/pirowflo.env
+
+[Install]
+WantedBy=multi-user.target

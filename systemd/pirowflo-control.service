@@ -1,0 +1,16 @@
+[Unit]
+Description=PiRowFlo Control API
+After=network.target supervisord.service
+Wants=supervisord.service
+
+[Service]
+Type=simple
+User=#USER#
+WorkingDirectory=#API_DIR#
+EnvironmentFile=/etc/pirowflo-control.env
+ExecStart=#API_DIR#/venv/bin/uvicorn app:app --host 0.0.0.0 --port 8090
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
