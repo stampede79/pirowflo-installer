@@ -83,6 +83,30 @@ sudo grep '^PIROWFLO_API_KEY=' /etc/pirowflo-control.env
 
 The API key is required by the PiRowFlo Control App.
 
+## Updating
+
+Update PiRowFlo and the Control API from GitHub:
+
+```bash
+cd ~/pirowflo-installer
+sudo ./update.sh
+```
+
+The updater:
+
+1. checks both repositories for local changes
+2. stops PiRowFlo and the Control API
+3. updates both repositories using fast-forward-only Git pulls
+4. updates Python dependencies
+5. regenerates the local PiRowFlo configuration
+6. restarts the services
+
+If an update fails after the services have been stopped, the updater attempts to
+start the existing services again.
+
+Local changes in `/opt/pirowflo` or `/opt/pirowflo-control-api` cause the update
+to abort instead of overwriting them.
+
 ## Services
 
 Check the PiRowFlo Supervisor service:
