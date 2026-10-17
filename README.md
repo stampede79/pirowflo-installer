@@ -20,6 +20,9 @@ Raspberry Pi.
 Clone the installer:
 
 ```bash
+sudo apt update
+sudo apt install -y git
+
 git clone https://github.com/stampede79/pirowflo-installer.git
 cd pirowflo-installer
 sudo ./install.sh
