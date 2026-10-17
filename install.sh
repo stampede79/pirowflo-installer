@@ -44,13 +44,35 @@ apt-get install -y \
     libdbus-1-dev \
     libglib2.0-dev \
     libcairo2-dev \
+    gir1.2-glib-2.0 \
+    libgirepository-1.0-1 \
     libgirepository-2.0-dev \
     libusb-1.0-0-dev \
     libbluetooth-dev \
     libffi-dev \
     bluetooth \
     bluez \
-    bluez-firmware
+    bluez-firmware \
+    rfkill
+
+log "Installing ANT+ USB permissions"
+
+install -m 0644 \
+    "$SCRIPT_DIR/udev/99-antusb.rules" \
+    /etc/udev/rules.d/99-antusb.rules
+
+udevadm control --reload-rules
+udevadm trigger --subsystem-match=usb
+
+log "Enabling Bluetooth"
+
+rfkill unblock bluetooth
+systemctl enable bluetooth.service
+systemctl start bluetooth.service
+
+if rfkill list bluetooth | grep -q 'Soft blocked: yes'; then
+    fail "Bluetooth is still soft-blocked"
+fi
 
 log "Checking installation directories"
 
